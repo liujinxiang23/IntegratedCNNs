@@ -159,37 +159,7 @@ output_units = 9 if (dataset == 'PU' or dataset == 'PC' or dataset == 'WH') else
 print(output_units)
 # %%
 
-## input layer
-## input layer
-input_layer = Input((S, S, L, 1))
 
-## convolutional layers
-conv_layer1 = Conv3D(filters=8, kernel_size=(3, 3, 7), activation='relu')(input_layer)
-conv_layer2 = Conv3D(filters=16, kernel_size=(3, 3, 5), activation='relu')(conv_layer1)
-conv_layer3 = Conv3D(filters=32, kernel_size=(3, 3, 3), activation='relu')(conv_layer2)
-#print(conv_layer3._keras_shape)
-print(conv_layer3.shape)
-#(None, 19, 19, 18, 32)
-#conv3d_shape = conv_layer3._keras_shape
-conv3d_shape = conv_layer3.shape
-conv_layer3 = Reshape((conv3d_shape[1], conv3d_shape[2], conv3d_shape[3]*conv3d_shape[4]))(conv_layer3)
-conv_layer4 = Conv2D(filters=64, kernel_size=(3,3), activation='relu')(conv_layer3)
-
-flatten_layer = Flatten()(conv_layer4)
-
-## fully connected layers
-dense_layer1 = Dense(units=256, activation='relu')(flatten_layer)
-dense_layer1 = Dropout(0.4)(dense_layer1)
-dense_layer2 = Dense(units=128, activation='relu')(dense_layer1)
-dense_layer2 = Dropout(0.4)(dense_layer2)
-output_layer = Dense(units=output_units, activation='softmax')(dense_layer2)
-
-
-# In[１７]:
-# define the model with input layer and output layer
-model = Model(inputs=input_layer, outputs=output_layer)
-
-# In[１８]:
 model.summary()
 
 # %%
