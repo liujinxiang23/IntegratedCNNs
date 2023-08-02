@@ -161,10 +161,10 @@ output_units = 9 if (dataset == 'PU' or dataset == 'PC' or dataset == 'WH') else
 conv_layer1 = Conv3D(filters=8, kernel_size=(3, 3, 7), activation='relu')(input_layer)
 conv_layer2 = Conv3D(filters=16, kernel_size=(3, 3, 5), activation='relu')(conv_layer1)
 conv3d_shape = conv_layer2.shape
-conv_layer3 = Reshape((conv3d_shape[1], conv3d_shape[2], conv3d_shape[3]*conv3d_shape[4]))(conv_layer2)
+conv_layer3 = Reshape()(conv_layer2)
 conv_layer4 = Conv2D(filters=32, kernel_size=(3,3), activation='relu')(conv_layer3)
 conv2d_shape=conv_layer4.shape
-conv_layer5 = Reshape((conv2d_shape[1], conv2d_shape[2]*conv2d_shape[3]))(conv_layer4)
+conv_layer5 = Reshape()(conv_layer4)
 conv_layer6 = Conv1D(filters=64, kernel_size=(3), activation='relu')(conv_layer5)###源为filter=64
 flatten_layer = Flatten()(conv_layer6)
 ## fully connected layers
